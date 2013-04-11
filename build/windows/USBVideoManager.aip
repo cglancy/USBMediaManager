@@ -11,10 +11,10 @@
     <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPPRODUCTICON" Value="video_folder_1.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="Charles Glancy"/>
-    <ROW Property="ProductCode" Value="1033:{F9C244E6-4883-46D1-B49F-A84489565269} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{7821DF4C-B3A5-4E21-BE68-649690DEAD6E} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="USB Video Manager"/>
-    <ROW Property="ProductVersion" Value="13.03.22" Type="32"/>
+    <ROW Property="ProductVersion" Value="13.04.10" Type="32"/>
     <ROW Property="REBOOT" MultiBuildValue="DefaultBuild:ReallySuppress"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{B39AC8FD-6F10-4B3A-8DF6-5D5793F80C93}"/>

@@ -154,7 +154,7 @@ QString Utility::applicationName()
 
 QString Utility::applicationVersionString()
 {
-	return "20130410";
+    return "20131216";
 }
 
 QString Utility::removableDrive()

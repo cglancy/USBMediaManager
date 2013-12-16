@@ -35,7 +35,7 @@
 #include <QHBoxLayout>
 
 #ifdef Q_OS_MAC
-#define SHOW_FLOW 0
+#define SHOW_FLOW 1
 #else
 #define SHOW_FLOW 1
 #endif

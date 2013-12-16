@@ -1,1 +1,1 @@
-~/Qt5.0.1/5.0.1/clang_64/bin/macdeployqt ../../USBVideoManager-build-Desktop_Qt_5_0_1_clang_64bit-Release/USBVideoManager.app -dmg
+~/Qt/5.2.0/clang_64/bin/macdeployqt ../../build-USBVideoManager-Desktop_Qt_5_2_0_clang_64bit-Release/USBVideoManager.app -dmg

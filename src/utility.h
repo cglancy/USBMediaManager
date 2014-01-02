@@ -16,6 +16,15 @@ public:
     static QString RecentLibraryListKey;
     static QString GeometryKey;
     static QString WindowStateKey;
+    static QString FolderThumbnailNameKey;
+
+    enum FolderThumbnailName
+    {
+        StandardFolderThumbnailName = 0,
+        PathPlusExtensionThumbnailName = 1
+    };
+    static FolderThumbnailName folderThumbnailName();
+    static void setFolderThumbnailName(FolderThumbnailName name);
 
 	static QString fileSizeString(qint64 size, bool kb = true);
 	static QString resolutionString(const QSize &size);

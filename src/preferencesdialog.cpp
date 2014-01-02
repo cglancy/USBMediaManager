@@ -28,6 +28,17 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 	ui->sourceLineEdit->setText(Utility::currentLibrarySourceUrl());
 	ui->sourceLineEdit->selectAll();
 
+    if (Utility::folderThumbnailName() == Utility::PathPlusExtensionThumbnailName)
+    {
+        ui->folderNameButton->setChecked(true);
+        ui->fixedNameButton->setChecked(false);
+    }
+    else
+    {
+        ui->folderNameButton->setChecked(false);
+        ui->fixedNameButton->setChecked(true);
+    }
+
     updateButtonState();
 }
 
@@ -56,6 +67,16 @@ void PreferencesDialog::setLibrarySourceUrl(const QString &url)
 QString PreferencesDialog::librarySourceUrl() const
 {
     return ui->sourceLineEdit->text();
+}
+
+Utility::FolderThumbnailName PreferencesDialog::folderThumbnailName() const
+{
+    Utility::FolderThumbnailName name = Utility::StandardFolderThumbnailName;
+
+    if (ui->folderNameButton->isChecked())
+        name = Utility::PathPlusExtensionThumbnailName;
+
+    return name;
 }
 
 void PreferencesDialog::browse()

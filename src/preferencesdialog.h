@@ -2,6 +2,7 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
+#include "utility.h"
 
 namespace Ui {
 	class PreferencesDialog;
@@ -20,6 +21,8 @@ public:
 
     void setLibrarySourceUrl(const QString &url);
     QString librarySourceUrl() const;
+
+    Utility::FolderThumbnailName folderThumbnailName() const;
 
 public slots:
 	void browse();

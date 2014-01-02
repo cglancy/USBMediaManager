@@ -37,7 +37,18 @@ QString Utility::LastExportDirectoryKey     = "lastExportDirectory";
 QString Utility::RecentLibraryListKey       = "recentLibraryList";
 QString Utility::GeometryKey                = "geometry";
 QString Utility::WindowStateKey             = "windowState";
+QString Utility::FolderThumbnailNameKey     = "folderThumbnailName";
 
+
+QString Utility::applicationName()
+{
+    return "USB Video Manager";
+}
+
+QString Utility::applicationVersionString()
+{
+    return "20140102-test";
+}
 
 QString Utility::fileSizeString(qint64 size, bool kb)
 {
@@ -238,4 +249,27 @@ QString Utility::localPath(const QString &urlStr)
     }
 
     return path;
+}
+
+Utility::FolderThumbnailName Utility::folderThumbnailName()
+{
+    FolderThumbnailName name = StandardFolderThumbnailName;
+
+    QSettings settings;
+    if (settings.contains(Utility::FolderThumbnailNameKey))
+    {
+        name = static_cast<FolderThumbnailName>(settings.value(Utility::FolderThumbnailNameKey).toInt());
+    }
+    else
+    {
+        settings.setValue(Utility::FolderThumbnailNameKey, static_cast<int>(name));
+    }
+
+    return name;
+}
+
+void Utility::setFolderThumbnailName(FolderThumbnailName name)
+{
+    QSettings settings;
+    settings.setValue(Utility::FolderThumbnailNameKey, static_cast<int>(name));
 }

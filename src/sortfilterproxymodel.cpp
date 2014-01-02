@@ -31,3 +31,9 @@ bool SortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &
 
 	return QSortFilterProxyModel::lessThan(left, right);
 }
+
+bool SortFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
+{
+    QModelIndex index = sourceModel()->index(sourceRow, VideoListModel::NameColumn, sourceParent);
+    return sourceModel()->data(index, Qt::DisplayRole).toString().contains(filterRegExp());
+}

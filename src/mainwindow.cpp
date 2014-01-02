@@ -359,6 +359,7 @@ void MainWindow::preferences()
 		QSettings settings;
 		settings.setValue(Utility::VideoDirectoryKey, dialog.videoDirectory());
         settings.setValue(Utility::LibrarySourceUrlKey, dialog.librarySourceUrl());
+        Utility::setFolderThumbnailName(dialog.folderThumbnailName());
 	}
 }
 
@@ -496,10 +497,11 @@ void MainWindow::exportFiles()
 		QString destDir = dialog.destinationDirectory();
         QList<QString> dirList;
         QList<QPair<QString, QString> > fileList;
+        Utility::FolderThumbnailName thumbName = Utility::folderThumbnailName();
 
 		for (int i = 0; i < rootNode->childCount(); i++)
         {
-			if (!exportFiles(rootNode->child(i), destDir, dirList, fileList))
+            if (!exportFiles(rootNode->child(i), destDir, dirList, fileList, thumbName))
                 return; // abort
         }
 
@@ -508,7 +510,7 @@ void MainWindow::exportFiles()
 	}
 }
 
-bool MainWindow::exportFiles(CategoryNode *node, const QString &destDir, QList<QString> &dirList, QList<QPair<QString, QString> > &fileList)
+bool MainWindow::exportFiles(CategoryNode *node, const QString &destDir, QList<QString> &dirList, QList<QPair<QString, QString> > &fileList, Utility::FolderThumbnailName thumbName)
 {
 	if (!node)
 		return false;
@@ -518,7 +520,13 @@ bool MainWindow::exportFiles(CategoryNode *node, const QString &destDir, QList<Q
 
     if (node->thumbnailFile()->state() == RemoteFile::DownloadedState)
     {
-        QString thumbnailPath = dirPath + "/folder.jpg";
+        QString thumbnailPath;
+
+        if (thumbName == Utility::PathPlusExtensionThumbnailName)
+            thumbnailPath = dirPath + ".jpg";
+        else
+            thumbnailPath = dirPath + "/folder.jpg";
+
         fileList.append(QPair<QString, QString>(node->thumbnailFile()->localPath(), thumbnailPath));
     }
 
@@ -542,7 +550,7 @@ bool MainWindow::exportFiles(CategoryNode *node, const QString &destDir, QList<Q
 
 	for (int i = 0; i < node->childCount(); i++)
     {
-		if (!exportFiles(node->child(i), destDir, dirList, fileList))
+        if (!exportFiles(node->child(i), destDir, dirList, fileList, thumbName))
             return false;
     }
 
@@ -818,6 +826,8 @@ void MainWindow::setCurrentView(MainWindow::View view)
         ui->actionFlowView->setChecked(false);
 		_stackedWidget->setCurrentIndex(ListIndex);
 		_listView->setModelColumn(VideoListModel::SmallIconColumn);
+        // Fix for Qt 5.2 scroll wheel bug
+        _listView->verticalScrollBar()->setSingleStep(32);
 		break;
 	case LargeIconView:
 		ui->actionSmallIconView->setChecked(false);
@@ -826,7 +836,9 @@ void MainWindow::setCurrentView(MainWindow::View view)
         ui->actionFlowView->setChecked(false);
 		_stackedWidget->setCurrentIndex(ListIndex);
 		_listView->setModelColumn(VideoListModel::MediumIconColumn);
-		break;
+        // Fix for Qt 5.2 scroll wheel bug
+        _listView->verticalScrollBar()->setSingleStep(45);
+        break;
 	case DetailView:
 		ui->actionSmallIconView->setChecked(false);
 		ui->actionLargeIconView->setChecked(false);

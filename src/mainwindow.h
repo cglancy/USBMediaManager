@@ -6,6 +6,8 @@
 #include <QList>
 #include <QPair>
 
+#include "utility.h"
+
 class DownloadManager;
 class QModelIndex;
 class QItemSelection;
@@ -114,7 +116,7 @@ private:
 	void setCurrentView(View view);
 	Video * currentVideo();
     CategoryNode * currentCategory();
-    bool exportFiles(CategoryNode *node, const QString &destDir, QList<QString> &dirList, QList<QPair<QString, QString> > &fileList);
+    bool exportFiles(CategoryNode *node, const QString &destDir, QList<QString> &dirList, QList<QPair<QString, QString> > &fileList, Utility::FolderThumbnailName name);
     void readSettings();
     void writeSettings();
     void updateRecentFileActions();

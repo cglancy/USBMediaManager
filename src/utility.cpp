@@ -47,7 +47,7 @@ QString Utility::applicationName()
 
 QString Utility::applicationVersionString()
 {
-    return "20140102";
+    return "20140102-test";
 }
 
 QString Utility::fileSizeString(qint64 size, bool kb)
@@ -156,6 +156,16 @@ QString Utility::currentLibrarySourceUrl()
 QString Utility::fallbackLibrarySourceUrl()
 {
 	return "http://glancyfamily.net/ldsml/lds-media-library-source.xml";
+}
+
+QString Utility::applicationName()
+{
+	return "USB Video Manager";
+}
+
+QString Utility::applicationVersionString()
+{
+    return "20131216";
 }
 
 QString Utility::removableDrive()

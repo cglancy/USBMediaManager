@@ -1,6 +1,6 @@
-set QTDIR=C:\Qt\Qt5.0.1
-set QMAKESPEC=win32-msvc2010
-C:\Qt\Qt5.0.1\5.0.1\msvc2010\bin\qmake -config release ..\..\src\USBVideoManager.pro
-set PATH=C:\Qt\Qt5.0.1\5.0.1\msvc2010\bin;%PATH%
-call "%VS100COMNTOOLS%vsvars32"
+set QTDIR=C:\Qt\5.2.0
+set QMAKESPEC=win32-msvc2012
+set PATH=%QTDIR%\msvc2012\bin;%PATH%
+qmake -config release ..\..\src\USBVideoManager.pro
+call "%VS110COMNTOOLS%vsvars32"
 nmake

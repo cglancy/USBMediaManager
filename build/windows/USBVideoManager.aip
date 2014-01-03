@@ -11,10 +11,10 @@
     <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPPRODUCTICON" Value="video_folder_1.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="Charles Glancy"/>
-    <ROW Property="ProductCode" Value="1033:{7821DF4C-B3A5-4E21-BE68-649690DEAD6E} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{D6627B90-D7F6-4965-BF60-DAEDD14C999F} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="USB Video Manager"/>
-    <ROW Property="ProductVersion" Value="13.04.10" Type="32"/>
+    <ROW Property="ProductVersion" Value="14.01.02" Type="32"/>
     <ROW Property="REBOOT" MultiBuildValue="DefaultBuild:ReallySuppress"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{B39AC8FD-6F10-4B3A-8DF6-5D5793F80C93}"/>
@@ -62,7 +62,7 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="D3DCompiler_43.dll" Component_="D3DCompiler_43.dll" FileName="D3DCom~1.dll|D3DCompiler_43.dll" Attributes="0" SourcePath="lib\D3DCompiler_43.dll" SelfReg="false"/>
+    <ROW File="D3DCompiler_43.dll" Component_="D3DCompiler_43.dll" FileName="D3DCom~2.dll|D3DCompiler_46.dll" Attributes="0" SourcePath="lib\d3dcompiler_46.dll" SelfReg="false"/>
     <ROW File="Qt5Concurrent.dll" Component_="Qt5Concurrent.dll" FileName="Qt5Con~1.dll|Qt5Concurrent.dll" Attributes="0" SourcePath="lib\Qt5Concurrent.dll" SelfReg="false" NextFile="Qt5Core.dll"/>
     <ROW File="Qt5Core.dll" Component_="Qt5Core.dll" FileName="Qt5Core.dll" Attributes="0" SourcePath="lib\Qt5Core.dll" SelfReg="false" NextFile="Qt5Gui.dll"/>
     <ROW File="Qt5Gui.dll" Component_="Qt5Gui.dll" FileName="Qt5Gui.dll" Attributes="0" SourcePath="lib\Qt5Gui.dll" SelfReg="false" NextFile="Qt5Multimedia.dll"/>
@@ -72,13 +72,13 @@
     <ROW File="Qt5Widgets.dll" Component_="Qt5Widgets.dll" FileName="Qt5Wid~1.dll|Qt5Widgets.dll" Attributes="0" SourcePath="lib\Qt5Widgets.dll" SelfReg="false" NextFile="qgif.dll"/>
     <ROW File="USBVideoManager.exe" Component_="USBVideoManager.exe" FileName="USBVid~1.exe|USBVideoManager.exe" Attributes="0" SourcePath="release\USBVideoManager.exe" SelfReg="false" NextFile="USBVideoManager.exe.embed.manifest" DigSign="true"/>
     <ROW File="USBVideoManager.exe.embed.manifest" Component_="USBVideoManager.exe.embed.manifest" FileName="USBVid~1.man|USBVideoManager.exe.embed.manifest" Attributes="0" SourcePath="release\USBVideoManager.exe.embed.manifest" SelfReg="false" NextFile="D3DCompiler_43.dll"/>
-    <ROW File="icudt49.dll" Component_="icudt49.dll" FileName="icudt49.dll" Attributes="0" SourcePath="lib\icudt49.dll" SelfReg="false" NextFile="icuin49.dll"/>
-    <ROW File="icuin49.dll" Component_="icuin49.dll" FileName="icuin49.dll" Attributes="0" SourcePath="lib\icuin49.dll" SelfReg="false" NextFile="icuuc49.dll"/>
-    <ROW File="icuuc49.dll" Component_="icuuc49.dll" FileName="icuuc49.dll" Attributes="0" SourcePath="lib\icuuc49.dll" SelfReg="false" NextFile="libEGL.dll"/>
+    <ROW File="icudt49.dll" Component_="icudt49.dll" FileName="icudt51.dll" Attributes="0" SourcePath="lib\icudt51.dll" SelfReg="false" NextFile="icuin49.dll"/>
+    <ROW File="icuin49.dll" Component_="icuin49.dll" FileName="icuin51.dll" Attributes="0" SourcePath="lib\icuin51.dll" SelfReg="false" NextFile="icuuc49.dll"/>
+    <ROW File="icuuc49.dll" Component_="icuuc49.dll" FileName="icuuc51.dll" Attributes="0" SourcePath="lib\icuuc51.dll" SelfReg="false" NextFile="libEGL.dll"/>
     <ROW File="libEGL.dll" Component_="libEGL.dll" FileName="libEGL.dll" Attributes="0" SourcePath="lib\libEGL.dll" SelfReg="false" NextFile="libGLESv2.dll"/>
     <ROW File="libGLESv2.dll" Component_="libGLESv2.dll" FileName="libGLE~1.dll|libGLESv2.dll" Attributes="0" SourcePath="lib\libGLESv2.dll" SelfReg="false" NextFile="Qt5Concurrent.dll"/>
-    <ROW File="msvcp100.dll" Component_="msvcp100.dll" FileName="msvcp100.dll" Attributes="0" SourcePath="lib\msvcp100.dll" SelfReg="false" NextFile="msvcr100.dll"/>
-    <ROW File="msvcr100.dll" Component_="msvcr100.dll" FileName="msvcr100.dll" Attributes="0" SourcePath="lib\msvcr100.dll" SelfReg="false" NextFile="USBVideoManager.exe"/>
+    <ROW File="msvcp100.dll" Component_="msvcp100.dll" FileName="msvcp110.dll" Attributes="0" SourcePath="lib\msvcp110.dll" SelfReg="false" NextFile="msvcr100.dll"/>
+    <ROW File="msvcr100.dll" Component_="msvcr100.dll" FileName="msvcr110.dll" Attributes="0" SourcePath="lib\msvcr110.dll" SelfReg="false" NextFile="USBVideoManager.exe"/>
     <ROW File="qgif.dll" Component_="qgif.dll" FileName="qgif.dll" Attributes="0" SourcePath="lib\imageformats\qgif.dll" SelfReg="false" NextFile="qico.dll"/>
     <ROW File="qico.dll" Component_="qico.dll" FileName="qico.dll" Attributes="0" SourcePath="lib\imageformats\qico.dll" SelfReg="false" NextFile="qjpeg.dll"/>
     <ROW File="qjpeg.dll" Component_="qjpeg.dll" FileName="qjpeg.dll" Attributes="0" SourcePath="lib\imageformats\qjpeg.dll" SelfReg="false" NextFile="qminimal.dll"/>

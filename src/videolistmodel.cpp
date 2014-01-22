@@ -11,6 +11,7 @@
 VideoListModel::VideoListModel(QObject *parent)
 	: QAbstractListModel(parent), _filterCategory(0)
 {
+    _audioPixmap = QPixmap(":/pvm/images/audio_16.png");
 	_videoPixmap = QPixmap(":/pvm/images/video_16.png");
 	_checkmarkPixmap = QPixmap(":/pvm/images/checkmark.png");
 	_errorPixmap = QPixmap(":/pvm/images/error.png");
@@ -83,16 +84,16 @@ QVariant VideoListModel::headerData(int section, Qt::Orientation orientation, in
 		switch (section)
 		{
         case NameColumn:
-            v = QVariant("Name");
+            v = QVariant(tr("Name"));
             break;
 		case TypeColumn:
-			v = QVariant("Type");
+            v = QVariant(tr("Type"));
 			break;
 		case SizeColumn:
-			v = QVariant("Size");
+            v = QVariant(tr("Size"));
 			break;
 		case DownloadedColumn:
-			v = QVariant("Downloaded");
+            v = QVariant(tr("Downloaded"));
 			break;
 		}
 	}
@@ -135,7 +136,7 @@ QVariant VideoListModel::data(const QModelIndex &index, int role) const
 			v = QVariant(Utility::fileSizeString(video->videoFile()->fileSize()));
 			break;
 		case TypeColumn:
-			v = QVariant(video->videoFile()->type());
+            v = QVariant(video->videoFile()->typeString());
 			break;
 		}
 	}
@@ -144,7 +145,10 @@ QVariant VideoListModel::data(const QModelIndex &index, int role) const
 		switch (index.column())
 		{
 		case OrdinalColumn:
-			v = QVariant(_videoPixmap);
+            if (video->videoFile()->type() == RemoteFile::AudioMp3Type)
+                v = QVariant(_audioPixmap);
+            else
+                v = QVariant(_videoPixmap);
 			break;
 		case DownloadedColumn:
 			if (video->videoFile()->state() == RemoteFile::DownloadedState)

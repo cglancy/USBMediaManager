@@ -120,21 +120,54 @@ void RemoteFile::setErrorMessage(const QString &error)
 	_errorMessage = error;
 }
 
-QString RemoteFile::type() const
+RemoteFile::Type RemoteFile::type() const
+{
+    Type type = UnknownType;
+
+    if (_category)
+        type = CategoryType;
+    else
+    {
+        QFileInfo fi(_localPath);
+        QString extension = fi.suffix();
+
+        if (extension == "mp4")
+            type = VideoMp4Type;
+        else if (extension == "mov")
+            type = VideoMovType;
+        else if (extension == "jpg")
+            type = ImageJpegType;
+        else if (extension == "mp3")
+            type = AudioMp3Type;
+    }
+
+    return type;
+}
+
+QString RemoteFile::typeString() const
 {
     QString typeStr;
 
-    QFileInfo fi(_localPath);
-    QString extension = fi.suffix();
-
-    if (extension == "mp4")
-        typeStr = "MP4 Video";
-    else if (extension == "mov")
-        typeStr = "QuickTime Movie";
-    else if (extension == "jpg")
-        typeStr = "JPEG Image";
-    else
-        typeStr = "Unknown File Type";
+    switch (type())
+    {
+    case VideoMp4Type:
+        typeStr = QObject::tr("MP4 Video");
+        break;
+    case VideoMovType:
+        typeStr = QObject::tr("QuickTime Movie");
+        break;
+    case AudioMp3Type:
+        typeStr = QObject::tr("MP3 Audio");
+        break;
+    case ImageJpegType:
+        typeStr = QObject::tr("JPEG Image");
+        break;
+    case CategoryType:
+        typeStr = QObject::tr("Category");
+        break;
+    default:
+        typeStr = QObject::tr("Unknown File Type");
+    }
 
     return typeStr;
 }

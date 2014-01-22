@@ -394,14 +394,15 @@ void MainWindow::openRecentFile()
         return;
 
     QString fileName = action->data().toString();
+    QString libraryName = action->text();
 
     if (!fileName.isEmpty() && QFile::exists(fileName))
     {
-        openFile(fileName);
+        openFile(fileName, libraryName);
     }
 }
 
-void MainWindow::openFile(const QString &fileName)
+void MainWindow::openFile(const QString &fileName, const QString &libraryName)
 {
     _inspector->clear();
 
@@ -411,11 +412,17 @@ void MainWindow::openFile(const QString &fileName)
     _videoListModel->filterByCategory(_library->rootNode());
     _detailView->sortByColumn(VideoListModel::NameColumn, Qt::AscendingOrder);
 
+    updateWindowTitle(libraryName);
     updateActionStates();
     downloadCategoryThumbnails(_library->rootNode());
     downloadVideoThumbnails();
     requestVideoFileSizes();
 	queryVideoMetadata();
+}
+
+void MainWindow::updateWindowTitle(const QString &libraryName)
+{
+    setWindowTitle(libraryName + " - " + Utility::applicationName());
 }
 
 bool MainWindow::okToCloseLibrary()
@@ -735,7 +742,7 @@ void MainWindow::fileDownloaded(RemoteFile *file)
 	{
 		if (libraryFile->state() == RemoteFile::DownloadedState)
 		{
-			openFile(libraryFile->localPath());
+            openFile(libraryFile->localPath(), libraryFile->name());
             addToRecentFiles(libraryFile);
 		}
 		else

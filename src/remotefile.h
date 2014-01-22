@@ -19,6 +19,16 @@ public:
 		DownloadErrorState 
 	};
 
+    enum Type
+    {
+        UnknownType,
+        CategoryType,
+        VideoMp4Type,
+        VideoMovType,
+        AudioMp3Type,
+        ImageJpegType
+    };
+
 public:
     RemoteFile();
 	RemoteFile(Video *video);
@@ -32,7 +42,8 @@ public:
 	void setUrl(QString url);
 	QString fileName() const;
 
-    QString type() const;
+    Type type() const;
+    QString typeString() const;
 
 	qint64 fileSize() const;
 	void setFileSize(qint64 sizeBytes);

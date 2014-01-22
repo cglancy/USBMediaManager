@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QList>
 #include <QPixmap>
+#include "remotefile.h"
 
 class CategoryNode;
 class Video;
@@ -51,14 +52,17 @@ private:
 	bool parseLibrary(QXmlStreamReader& xml);
     bool createDirectory(const QString &path);
     QString stripUrlQuery(const QString &url);
-    void initThumbnailFile(ThumbnailFile *file, const QString &urlStr, const QString &idStr);
+    void initThumbnailFile(ThumbnailFile *file, const QString &urlStr, const QString &idStr, RemoteFile::Type type);
 
 private:
     CategoryNode *_rootNode;
 	QMap<QString, Video*> _videoMap;
 	QList<QPair<CategoryNode*, QString> > _refList;
-    QPixmap _folderPixmap;
 	QString _videoDirectory, _mediaDirectory, _thumbnailDirectory;
+    QPixmap _folderPixmap;
+    QPixmap _smallCategoryPixmap, _mediumCategoryPixmap, _largeCategoryPixmap;
+    QPixmap _smallAudioPixmap, _mediumAudioPixmap, _largeAudioPixmap;
+    QPixmap _smallVideoPixmap, _mediumVideoPixmap, _largeVideoPixmap;
 };
 
 #endif // MEDIALIBRARY_H

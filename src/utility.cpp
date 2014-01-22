@@ -47,7 +47,7 @@ QString Utility::applicationName()
 
 QString Utility::applicationVersionString()
 {
-    return "20140102";
+    return "20140121 Beta";
 }
 
 QString Utility::fileSizeString(qint64 size, bool kb)

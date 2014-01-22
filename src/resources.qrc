@@ -26,5 +26,10 @@
         <file>images/large_icons.png</file>
         <file>images/small_icons.png</file>
         <file>images/open_button.png</file>
+        <file>images/audio_16.png</file>
+        <file>images/audio_32.png</file>
+        <file>images/audio_48.png</file>
+        <file>images/audio_128.png</file>
+        <file>images/audio_256.png</file>
     </qresource>
 </RCC>

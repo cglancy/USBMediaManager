@@ -64,10 +64,6 @@ CategoryNode::CategoryNode(MediaLibrary *library, CategoryNode *parent)
 		parent->addChild(this);
 
     _file = new ThumbnailFile(this);
-
-	_file->setPixmap(QPixmap(":/pvm/images/video_folder_48.png"), ThumbnailFile::SmallPixmapSize);
-	_file->setPixmap(QPixmap(":/pvm/images/video_folder_128.png"), ThumbnailFile::MediumPixmapSize);
-	_file->setPixmap(QPixmap(":/pvm/images/video_folder_256.png"), ThumbnailFile::LargePixmapSize);
 }
 
 CategoryNode::~CategoryNode()

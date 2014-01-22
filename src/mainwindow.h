@@ -121,12 +121,13 @@ private:
     void writeSettings();
     void updateRecentFileActions();
     void addToRecentFiles(Library *library);
-    void openFile(const QString &filename);
+    void openFile(const QString &filepath, const QString &libraryName);
 	void downloadCategory(CategoryNode *node, QSet<VideoFile*> &videoFiles);
 	void pauseCategory(CategoryNode *node, QSet<VideoFile*> &videoFiles);
     void setDownloadAction(DownloadActionState state, bool enabled);
 	bool okToExit();
 	bool okToCloseLibrary();
+    void updateWindowTitle(const QString &filename);
 
 private:
     Ui::MainWindow *ui;

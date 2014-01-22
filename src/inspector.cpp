@@ -71,7 +71,7 @@ void Inspector::updateInternal()
 	{
 		setPixmap(_currentVideo->thumbnailFile()->pixmap(ThumbnailFile::LargePixmapSize));
 		setName(_currentVideo->name());
-        setType(_currentVideo->videoFile()->type());
+        setType(_currentVideo->videoFile()->typeString());
 
         QUrl url(_currentVideo->videoFile()->url());
         appendPair(tr("Website:"), url.host());

@@ -55,7 +55,7 @@ private:
 private:
     CategoryNode *_filterCategory;
 	QList<Video*> _videos;
-	QPixmap _videoPixmap, _checkmarkPixmap, _errorPixmap;
+    QPixmap _audioPixmap, _videoPixmap, _checkmarkPixmap, _errorPixmap;
 };
 
 #endif // VIDEOLISTMODEL_H

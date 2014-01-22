@@ -8,10 +8,6 @@ Video::Video(MediaLibrary *library, const QString &id)
 {
 	_thumbnailFile = new ThumbnailFile(this);
 	_file = new VideoFile(this);
-
-	_thumbnailFile->setPixmap(QPixmap(":/pvm/images/video_48.png"), ThumbnailFile::SmallPixmapSize);
-	_thumbnailFile->setPixmap(QPixmap(":/pvm/images/video_128.png"), ThumbnailFile::MediumPixmapSize);
-	_thumbnailFile->setPixmap(QPixmap(":/pvm/images/video_256.png"), ThumbnailFile::LargePixmapSize);
 }
 
 Video::~Video()

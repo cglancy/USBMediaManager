@@ -20,6 +20,18 @@ MediaLibrary::MediaLibrary(QObject *parent)
     : QAbstractItemModel(parent), _rootNode(0)
 {
     _folderPixmap = QPixmap(":/pvm/images/video_folder_16.png");
+
+    _smallCategoryPixmap = QPixmap(":/pvm/images/video_folder_48.png");
+    _mediumCategoryPixmap = QPixmap(":/pvm/images/video_folder_128.png");
+    _largeCategoryPixmap = QPixmap(":/pvm/images/video_folder_256.png");
+
+    _smallVideoPixmap = QPixmap(":/pvm/images/video_48.png");
+    _mediumVideoPixmap = QPixmap(":/pvm/images/video_128.png");
+    _largeVideoPixmap = QPixmap(":/pvm/images/video_256.png");
+
+    _smallAudioPixmap = QPixmap(":/pvm/images/audio_48.png");
+    _mediumAudioPixmap = QPixmap(":/pvm/images/audio_128.png");
+    _largeAudioPixmap = QPixmap(":/pvm/images/audio_256.png");
 }
 
 MediaLibrary::~MediaLibrary()
@@ -210,46 +222,68 @@ CategoryNode* MediaLibrary::parseCategoryNode(QXmlStreamReader& xml, CategoryNod
 	if (attributes.hasAttribute("thumbnail"))
 	{
 		QString urlStr = attributes.value("thumbnail").toString();
-        initThumbnailFile(node->thumbnailFile(), urlStr, QString());
+        initThumbnailFile(node->thumbnailFile(), urlStr, QString(), RemoteFile::CategoryType);
 	}
 
 	return node;
 }
 
-void MediaLibrary::initThumbnailFile(ThumbnailFile *file, const QString &urlStr, const QString &idStr)
+void MediaLibrary::initThumbnailFile(ThumbnailFile *file, const QString &urlStr, const QString &idStr, RemoteFile::Type type)
 {
     if (urlStr.isEmpty())
-        return;
-
-    file->setUrl(urlStr);
-
-    QString filePath;
-
-    if (urlStr.startsWith("./thumbnails"))
     {
-        filePath = urlStr;
-        filePath.replace("./thumbnails", _thumbnailDirectory);
-    }
-    else if (Utility::isLocalPath(urlStr))
-    {
-        filePath = Utility::localPath(urlStr);
-    }
-    else if (!idStr.isEmpty())
-    {
-        QFileInfo fileNameInfo(file->fileName());
-        filePath = QString("%1/thumbnail-%3.%4").arg(_thumbnailDirectory, idStr, fileNameInfo.suffix());
+        // set fallback thumbnails
+        if (type == RemoteFile::CategoryType)
+        {
+            file->setPixmap(_smallCategoryPixmap, ThumbnailFile::SmallPixmapSize);
+            file->setPixmap(_mediumCategoryPixmap, ThumbnailFile::MediumPixmapSize);
+            file->setPixmap(_largeCategoryPixmap, ThumbnailFile::LargePixmapSize);
+        }
+        else if (type == RemoteFile::AudioMp3Type)
+        {
+            file->setPixmap(_smallAudioPixmap, ThumbnailFile::SmallPixmapSize);
+            file->setPixmap(_mediumAudioPixmap, ThumbnailFile::MediumPixmapSize);
+            file->setPixmap(_largeAudioPixmap, ThumbnailFile::LargePixmapSize);
+        }
+        else
+        {
+            file->setPixmap(_smallVideoPixmap, ThumbnailFile::SmallPixmapSize);
+            file->setPixmap(_mediumVideoPixmap, ThumbnailFile::MediumPixmapSize);
+            file->setPixmap(_largeVideoPixmap, ThumbnailFile::LargePixmapSize);
+        }
     }
     else
     {
-        filePath = _thumbnailDirectory + "/" + file->fileName();
-    }
+        file->setUrl(urlStr);
 
-    file->setLocalPath(filePath);
-    if (QFile::exists(filePath))
-    {
-        QFile localFile(filePath);
-        file->setState(RemoteFile::DownloadedState);
-        file->setFileSize(localFile.size());
+        QString filePath;
+
+        if (urlStr.startsWith("./thumbnails"))
+        {
+            filePath = urlStr;
+            filePath.replace("./thumbnails", _thumbnailDirectory);
+        }
+        else if (Utility::isLocalPath(urlStr))
+        {
+            filePath = Utility::localPath(urlStr);
+        }
+        else if (!idStr.isEmpty())
+        {
+            QFileInfo fileNameInfo(file->fileName());
+            filePath = QString("%1/thumbnail-%3.%4").arg(_thumbnailDirectory, idStr, fileNameInfo.suffix());
+        }
+        else
+        {
+            filePath = _thumbnailDirectory + "/" + file->fileName();
+        }
+
+        file->setLocalPath(filePath);
+        if (QFile::exists(filePath))
+        {
+            QFile localFile(filePath);
+            file->setState(RemoteFile::DownloadedState);
+            file->setFileSize(localFile.size());
+        }
     }
 }
 
@@ -278,11 +312,7 @@ Video* MediaLibrary::parseVideo(QXmlStreamReader& xml)
 	if (attributes.hasAttribute("name")) 
 		video->setName(attributes.value("name").toString());
 
-	if (attributes.hasAttribute("thumbnail"))
-	{
-		QString urlStr = attributes.value("thumbnail").toString();
-        initThumbnailFile(video->thumbnailFile(), urlStr, video->id());
-	}
+    RemoteFile::Type type = RemoteFile::UnknownType;
 
 	if (attributes.hasAttribute("url"))
 	{
@@ -306,6 +336,7 @@ Video* MediaLibrary::parseVideo(QXmlStreamReader& xml)
                 filePath = _mediaDirectory + "/" + file->fileName();
 
             file->setLocalPath(filePath);
+            type = file->type();
 
             QFileInfo fi(filePath);
             QString downloadPath(filePath);
@@ -325,6 +356,12 @@ Video* MediaLibrary::parseVideo(QXmlStreamReader& xml)
             }
         }
 	}
+
+    if (attributes.hasAttribute("thumbnail"))
+    {
+        QString urlStr = attributes.value("thumbnail").toString();
+        initThumbnailFile(video->thumbnailFile(), urlStr, video->id(), type);
+    }
 
 	return video;
 }

@@ -1,5 +1,7 @@
 ## USB Video Manager
 
+![alt tag](https://github.com/cglancy/USBMediaManager/blob/master/screenshot.png "USB Video Manager")
+
 The USB Video Manager is a desktop application for downloading and preparing videos for playback on USB media players.
 USB Video Manager creates folders and thumbnails for the videos on the USB media. 
 
@@ -15,5 +17,5 @@ Version 20140102
 * Videos are available in "Library" collections for easy downloading.
 * Files are downloaded in the background and allow pause and resume.
 * Videos are copied to the USB media in the order determined by the "Library" since Roku/Western Digital read content in write order.
-* List, icon and gallery views are available to search, browse and play the videos.
+* List, icon and 3D gallery views are available to search, browse and play the videos.
 
